@@ -63,5 +63,5 @@ akde <- ggplot(hrs_8_krov) +
   ) +
   theme(plot.title = element_text(size = 30, face = "bold")) 
 
-gganimate::animate(akde, height = 800, width =800)
-anim_save("47016_AKDE.gif")
+gganimate::animate(akde, height = 800, width =800) # creating an animation with the required width and height
+anim_save("47016_AKDE.gif") # export animation in GIF format
