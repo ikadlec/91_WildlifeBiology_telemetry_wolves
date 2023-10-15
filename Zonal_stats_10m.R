@@ -1,21 +1,16 @@
 require(ctmm)
 require(raster)
 require(rgdal)
-library(dplyr)
 library(stars)
 library(tidyverse)
 
 # Loading the necessary data
 load("UDS_10m.RData")
 load("UDS_month_wolves_10m.RData")
-setwd("C:\\Users\\picap\\Desktop\\Papers\\Wolves_territotoriality\\esa_clip")
 
 rasfn <- "ESA_clip_proj.tif"
 ESA <- raster(rasfn)
-
-setwd("C:\\Users\\picap\\Desktop\\Papers\\6169817")
 name <- read.table("rast_table_ESA.csv", header = T, sep = ";") # table containing legend to ESA landcover
-
 
 habitat <- data.frame(Value = seq(10, 110, by = 10),
                    Habitat = c("Tree cover", "Shrubland", "Grassland", "Cropland",
@@ -711,11 +706,9 @@ zonal_ESA_month <- zonal_month_ESA %>%
   ))
 
 # smazat
-test <- zonal_ESA_month %>%
+ESA_mont <- zonal_ESA_month %>%
   mutate(Value = zone) %>%
   left_join(name)
-
-ESA_month <- test
 
 zonal_ESA_month_sum <- zonal_ESA_month %>%
   group_by(month, zone) %>% 
@@ -727,4 +720,3 @@ zonal_ESA_month_sum <- zonal_ESA_month %>%
 
 
 save(ESA_month, file = "ESA_zonal_month.RData")
-re
